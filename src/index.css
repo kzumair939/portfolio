@@ -148,6 +148,14 @@ body {
   animation: glowOrb 14s ease-in-out infinite reverse;
 }
 
+@media (max-width: 640px) {
+  .glow-orb-left, .glow-orb-right {
+    width: 280px !important;
+    height: 280px !important;
+    opacity: 0.12 !important;
+  }
+}
+
 /* Glassmorphism & Card Shine */
 .glass {
   background: rgba(255,255,255,0.035);

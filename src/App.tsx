@@ -796,12 +796,16 @@ export default function App() {
               zIndex: 2,
               width: '100%',
               maxWidth: 500,
+              maxHeight: '90vh',
+              overflowY: 'auto',
               background: '#121413',
               borderRadius: 24,
-              padding: 32,
+              padding: '24px 20px',
               border: '1px solid rgba(57, 232, 122, 0.35)',
               boxShadow: '0 25px 70px rgba(0,0,0,0.9), 0 0 50px rgba(57,232,122,0.18)',
+              boxSizing: 'border-box',
             }}
+            className="scroll-panel"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -1106,8 +1110,8 @@ function ProjectCard({
         {visual === 'masail' ? <MasailVisual hovered={hovered} /> : <MindCareVisual hovered={hovered} />}
       </div>
 
-      <div style={{ padding: '20px 24px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 10 }}>
+      <div style={{ padding: '20px 20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 10, flexWrap: 'wrap' }}>
           <div>
             <h3 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '1.15rem', fontWeight: 700, color: '#F5F5F5', margin: 0 }}>
               {title}
