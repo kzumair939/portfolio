@@ -12,7 +12,7 @@ export const PERSONAL_INFO = {
   github: 'https://github.com/kzumair939',
   resumeUrl: '/Umair_Khan_Resume.pdf',
   // Get a free direct inbox key at https://web3forms.com (no backend required!)
-  web3formsKey: import.meta.env.VITE_WEB3FORMS_KEY || '',
+  web3formsKey: import.meta.env.VITE_WEB3FORMS_KEY || '0ce201bc-ae90-4183-ac12-711d5738016b',
 }
 
 const NAV_LINKS = ['About', 'Skills', 'Projects', 'Journey', 'Education', 'Contact']
