@@ -17,6 +17,16 @@ export const PERSONAL_INFO = {
 
 const NAV_LINKS = ['About', 'Skills', 'Projects', 'Certifications', 'Journey', 'Education', 'Contact']
 
+const NAV_ICONS: Record<string, string> = {
+  About: '👤',
+  Skills: '⚡',
+  Projects: '💻',
+  Certifications: '📜',
+  Journey: '🚀',
+  Education: '🎓',
+  Contact: '✉️',
+}
+
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 }
@@ -24,6 +34,7 @@ function scrollTo(id: string) {
 export default function App() {
   const [activeSection, setActiveSection] = useState('about')
   const [cardHover, setCardHover] = useState<string | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Hire / Contact Modal State
   const [isHireModalOpen, setIsHireModalOpen] = useState(false)
@@ -118,6 +129,191 @@ export default function App() {
         }}
       />
 
+      {/* ── TOP STICKY HEADER (MOBILE ONLY) ── */}
+      <header
+        style={{
+          position: 'sticky',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          background: 'rgba(10, 10, 10, 0.88)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          padding: '10px 16px',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+        className="hidden max-[900px]:flex"
+      >
+        <button
+          onClick={() => scrollTo('about')}
+          style={{
+            background: 'none',
+            border: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            cursor: 'pointer',
+            padding: 0,
+            textAlign: 'left',
+          }}
+          className="touch-target"
+        >
+          <img
+            src={profilePhoto}
+            alt={PERSONAL_INFO.name}
+            style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover', border: '1.5px solid rgba(57,232,122,0.4)' }}
+          />
+          <div>
+            <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#F5F5F5', lineHeight: 1.2 }}>
+              {PERSONAL_INFO.name}
+            </div>
+            <div style={{ fontSize: '0.62rem', color: '#39E87A', fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              {PERSONAL_INFO.title}
+            </div>
+          </div>
+        </button>
+
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Navigation Menu"
+          className="touch-target touch-active"
+          style={{
+            background: isMobileMenuOpen ? 'rgba(57,232,122,0.15)' : 'rgba(255,255,255,0.05)',
+            border: '1px solid ' + (isMobileMenuOpen ? 'rgba(57,232,122,0.35)' : 'rgba(255,255,255,0.1)'),
+            borderRadius: 10,
+            color: isMobileMenuOpen ? '#39E87A' : '#F5F5F5',
+            fontSize: '1.2rem',
+            cursor: 'pointer',
+            width: 44,
+            height: 44,
+          }}
+        >
+          {isMobileMenuOpen ? '✕' : '☰'}
+        </button>
+      </header>
+
+      {/* ── MOBILE NAVIGATION DRAWER OVERLAY ── */}
+      {isMobileMenuOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 99,
+            display: 'flex',
+            flexDirection: 'column',
+            background: 'rgba(10, 10, 10, 0.96)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            padding: '76px 20px 30px',
+            boxSizing: 'border-box',
+            overflowY: 'auto',
+          }}
+          className="animate-slide-down scroll-panel max-[900px]:flex hidden"
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%', maxWidth: 480, margin: '0 auto' }}>
+            <div style={{ fontSize: '0.7rem', color: '#8A8F8B', fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 8, paddingLeft: 6 }}>
+              Navigation Menu
+            </div>
+            {NAV_LINKS.map((link) => {
+              const isActive = activeSection === link.toLowerCase()
+              const icon = NAV_ICONS[link] || '•'
+              return (
+                <button
+                  key={link}
+                  onClick={() => {
+                    scrollTo(link.toLowerCase())
+                    setIsMobileMenuOpen(false)
+                  }}
+                  className="touch-active"
+                  style={{
+                    width: '100%',
+                    minHeight: 52,
+                    padding: '12px 18px',
+                    borderRadius: 12,
+                    background: isActive ? 'rgba(57,232,122,0.12)' : 'rgba(255,255,255,0.03)',
+                    border: '1px solid ' + (isActive ? 'rgba(57,232,122,0.3)' : 'rgba(255,255,255,0.06)'),
+                    color: isActive ? '#39E87A' : '#F5F5F5',
+                    fontSize: '1rem',
+                    fontWeight: isActive ? 700 : 500,
+                    textAlign: 'left',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <span style={{ fontSize: '1.15rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 24 }}>
+                      {icon}
+                    </span>
+                    <span>{link}</span>
+                  </span>
+                  {isActive ? (
+                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#39E87A', boxShadow: '0 0 10px #39E87A' }} />
+                  ) : (
+                    <span style={{ color: '#8A8F8B', fontSize: '0.85rem' }}>→</span>
+                  )}
+                </button>
+              )
+            })}
+
+            {/* Drawer Quick Action Buttons */}
+            <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <a
+                href={PERSONAL_INFO.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="touch-active"
+                style={{
+                  width: '100%',
+                  minHeight: 48,
+                  borderRadius: 12,
+                  background: 'rgba(57,232,122,0.1)',
+                  border: '1px solid rgba(57,232,122,0.3)',
+                  color: '#39E87A',
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 8,
+                  textDecoration: 'none',
+                }}
+              >
+                📄 View Resume PDF ↗
+              </a>
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  handleHireClick('Mobile Drawer Inquiry')
+                }}
+                className="touch-active"
+                style={{
+                  width: '100%',
+                  minHeight: 48,
+                  borderRadius: 12,
+                  background: '#39E87A',
+                  border: 'none',
+                  color: '#0A0A0A',
+                  fontSize: '0.9rem',
+                  fontWeight: 700,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 8,
+                  cursor: 'pointer',
+                }}
+              >
+                ✉ Contact Me
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div
         style={{
           position: 'relative',
@@ -132,7 +328,7 @@ export default function App() {
           alignItems: 'start',
           boxSizing: 'border-box',
         }}
-        className="max-[900px]:grid-cols-1!"
+        className="max-[900px]:grid-cols-1! max-[640px]:px-4! max-[640px]:py-4! max-[640px]:pb-28!"
       >
         {/* ── LEFT PROFILE CARD ── */}
         <aside
@@ -237,19 +433,21 @@ export default function App() {
               ))}
             </div>
 
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 8, marginTop: 2 }}>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10, marginTop: 4 }}>
               <a
                 href={PERSONAL_INFO.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="touch-active"
                 style={{
                   width: '100%',
-                  padding: '8px 0',
-                  borderRadius: 8,
+                  minHeight: 44,
+                  padding: '10px 0',
+                  borderRadius: 10,
                   background: 'rgba(57,232,122,0.1)',
                   border: '1px solid rgba(57,232,122,0.3)',
                   color: '#39E87A',
-                  fontSize: '0.8rem',
+                  fontSize: '0.85rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   display: 'flex',
@@ -259,27 +457,21 @@ export default function App() {
                   textDecoration: 'none',
                   transition: 'all 0.2s',
                 }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = 'rgba(57,232,122,0.2)'
-                  e.currentTarget.style.borderColor = 'rgba(57,232,122,0.5)'
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = 'rgba(57,232,122,0.1)'
-                  e.currentTarget.style.borderColor = 'rgba(57,232,122,0.3)'
-                }}
               >
                 📄 View Resume PDF ↗
               </a>
               <button
                 onClick={() => handleHireClick('Contact Inquiry')}
+                className="touch-active"
                 style={{
                   width: '100%',
-                  padding: '8px 0',
-                  borderRadius: 8,
+                  minHeight: 44,
+                  padding: '10px 0',
+                  borderRadius: 10,
                   background: '#39E87A',
                   border: 'none',
                   color: '#0A0A0A',
-                  fontSize: '0.8rem',
+                  fontSize: '0.85rem',
                   fontWeight: 700,
                   cursor: 'pointer',
                   display: 'flex',
@@ -288,8 +480,6 @@ export default function App() {
                   gap: 6,
                   transition: 'all 0.2s',
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.background = '#20C96B')}
-                onMouseOut={(e) => (e.currentTarget.style.background = '#39E87A')}
               >
                 ✉ Contact Me
               </button>
@@ -327,7 +517,7 @@ export default function App() {
                 color: '#8A8F8B',
                 lineHeight: 1.75,
                 maxWidth: 640,
-                marginBottom: 36,
+                marginBottom: 28,
               }}
             >
               I'm M. Umair Khan, a Software Engineering student focused on building modern
@@ -335,6 +525,55 @@ export default function App() {
               systems, REST APIs, authentication flows, and practical software solutions that solve
               real-world problems.
             </p>
+
+            {/* Hero CTAs (Fitts's & Von Restorff UX Laws) */}
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 36 }}>
+              <button
+                onClick={() => scrollTo('projects')}
+                className="touch-active"
+                style={{
+                  minHeight: 46,
+                  padding: '12px 24px',
+                  borderRadius: 10,
+                  background: '#39E87A',
+                  border: 'none',
+                  color: '#0A0A0A',
+                  fontWeight: 700,
+                  fontSize: '0.88rem',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  boxShadow: '0 4px 20px rgba(57,232,122,0.25)',
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.background = '#20C96B')}
+                onMouseOut={(e) => (e.currentTarget.style.background = '#39E87A')}
+              >
+                🚀 View Projects
+              </button>
+              <button
+                onClick={() => handleHireClick('Hero Contact Inquiry')}
+                className="touch-active"
+                style={{
+                  minHeight: 46,
+                  padding: '12px 22px',
+                  borderRadius: 10,
+                  background: 'rgba(57,232,122,0.12)',
+                  border: '1px solid rgba(57,232,122,0.35)',
+                  color: '#39E87A',
+                  fontWeight: 600,
+                  fontSize: '0.88rem',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(57,232,122,0.22)')}
+                onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(57,232,122,0.12)')}
+              >
+                ✉ Contact Me
+              </button>
+            </div>
 
             {/* Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 14, maxWidth: 540 }}>
@@ -668,8 +907,10 @@ export default function App() {
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <button
                 onClick={() => handleHireClick('Hire / Opportunity Inquiry')}
+                className="touch-active max-[600px]:w-full"
                 style={{
-                  padding: '12px 28px',
+                  minHeight: 46,
+                  padding: '12px 24px',
                   borderRadius: 10,
                   background: '#39E87A',
                   color: '#0A0A0A',
@@ -680,6 +921,7 @@ export default function App() {
                   transition: 'all 0.2s',
                   display: 'inline-flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   gap: 8,
                 }}
                 onMouseOver={(e) => (e.currentTarget.style.background = '#20C96B')}
@@ -689,8 +931,10 @@ export default function App() {
               </button>
               <a
                 href={`mailto:${PERSONAL_INFO.email}`}
+                className="touch-active max-[600px]:w-full"
                 style={{
-                  padding: '12px 24px',
+                  minHeight: 46,
+                  padding: '12px 22px',
                   borderRadius: 10,
                   background: 'rgba(57,232,122,0.12)',
                   border: '1px solid rgba(57,232,122,0.3)',
@@ -701,6 +945,7 @@ export default function App() {
                   transition: 'all 0.2s',
                   display: 'inline-flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   gap: 8,
                 }}
               >
@@ -710,8 +955,10 @@ export default function App() {
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="touch-active max-[600px]:w-full"
                 style={{
-                  padding: '12px 24px',
+                  minHeight: 46,
+                  padding: '12px 20px',
                   borderRadius: 10,
                   background: 'rgba(255,255,255,0.06)',
                   border: '1px solid rgba(255,255,255,0.1)',
@@ -722,6 +969,7 @@ export default function App() {
                   transition: 'all 0.2s',
                   display: 'inline-flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   gap: 8,
                 }}
               >
@@ -731,8 +979,10 @@ export default function App() {
                 href={PERSONAL_INFO.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="touch-active max-[600px]:w-full"
                 style={{
-                  padding: '12px 24px',
+                  minHeight: 46,
+                  padding: '12px 20px',
                   borderRadius: 10,
                   background: 'rgba(255,255,255,0.06)',
                   border: '1px solid rgba(255,255,255,0.1)',
@@ -743,6 +993,7 @@ export default function App() {
                   transition: 'all 0.2s',
                   display: 'inline-flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   gap: 8,
                 }}
               >
@@ -753,35 +1004,35 @@ export default function App() {
         </main>
       </div>
 
-      {/* ── FLOATING BOTTOM NAV ── */}
+      {/* ── FLOATING BOTTOM NAV (DESKTOP ONLY) ── */}
       <div
         style={{
           position: 'fixed',
           bottom: 20,
           left: '50%',
           transform: 'translateX(-50%)',
-          zIndex: 100,
-          background: 'rgba(15,15,15,0.85)',
+          zIndex: 90,
+          background: 'rgba(15,15,15,0.88)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           border: '1px solid rgba(255,255,255,0.1)',
           borderRadius: 100,
-          padding: '8px 16px',
-          display: 'flex',
+          padding: '6px 12px',
           alignItems: 'center',
           gap: 4,
           boxShadow: '0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(57,232,122,0.05)',
-          maxWidth: 'calc(100vw - 32px)',
+          maxWidth: 'calc(100vw - 24px)',
           overflowX: 'auto',
           boxSizing: 'border-box',
         }}
+        className="scroll-panel hidden min-[900px]:flex"
       >
         {/* mini profile */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, paddingRight: 12, borderRight: '1px solid rgba(255,255,255,0.08)', marginRight: 4 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingRight: 10, borderRight: '1px solid rgba(255,255,255,0.08)', marginRight: 2 }}>
           <img
             src={profilePhoto}
             alt={PERSONAL_INFO.name}
-            style={{ width: 30, height: 30, borderRadius: '50%', objectFit: 'cover', objectPosition: 'top', border: '1px solid rgba(57,232,122,0.3)' }}
+            style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover', objectPosition: 'top', border: '1px solid rgba(57,232,122,0.3)' }}
           />
           <div style={{ display: 'none' }} className="sm:block">
             <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#F5F5F5', whiteSpace: 'nowrap' }}>{PERSONAL_INFO.name}</div>
@@ -794,13 +1045,15 @@ export default function App() {
           <button
             key={link}
             onClick={() => scrollTo(link.toLowerCase())}
+            className="touch-active"
             style={{
               background: activeSection === link.toLowerCase() ? 'rgba(57,232,122,0.12)' : 'transparent',
               border: 'none',
               color: activeSection === link.toLowerCase() ? '#39E87A' : '#8A8F8B',
               fontSize: '0.78rem',
               fontWeight: activeSection === link.toLowerCase() ? 600 : 400,
-              padding: '6px 10px',
+              padding: '8px 10px',
+              minHeight: 36,
               borderRadius: 8,
               cursor: 'pointer',
               transition: 'all 0.2s',
@@ -813,12 +1066,36 @@ export default function App() {
           </button>
         ))}
 
+        {/* Quick Back to Top */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          title="Back to top"
+          className="touch-active"
+          style={{
+            marginLeft: 4,
+            padding: '6px 10px',
+            minHeight: 36,
+            borderRadius: 100,
+            background: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            color: '#F5F5F5',
+            fontWeight: 600,
+            fontSize: '0.78rem',
+            cursor: 'pointer',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          ↑ Top
+        </button>
+
         {/* Hire Me */}
         <button
           onClick={() => handleHireClick('Hire Me Request')}
+          className="touch-active"
           style={{
-            marginLeft: 8,
-            padding: '7px 16px',
+            marginLeft: 4,
+            padding: '7px 14px',
+            minHeight: 36,
             borderRadius: 100,
             background: '#39E87A',
             border: 'none',
@@ -883,18 +1160,19 @@ export default function App() {
           >
             <button
               onClick={() => setIsHireModalOpen(false)}
+              className="touch-target touch-active"
               style={{
                 position: 'absolute',
-                top: 20,
-                right: 20,
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                top: 16,
+                right: 16,
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.12)',
                 color: '#8A8F8B',
-                width: 32,
-                height: 32,
+                width: 38,
+                height: 38,
                 borderRadius: '50%',
                 cursor: 'pointer',
-                fontSize: '1rem',
+                fontSize: '1.1rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -1173,7 +1451,7 @@ function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number
 function CertificationCard({ title, provider, date }: Certification) {
   return (
     <div
-      className="glass glass-card"
+      className="glass glass-card touch-active"
       style={{
         borderRadius: 16,
         padding: '20px 20px',
@@ -1300,20 +1578,27 @@ const sectionHeading: React.CSSProperties = {
 }
 
 function ContactRow({ icon, label, href }: { icon: React.ReactNode; label: string; href?: string }) {
+  const rowStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 8,
+    fontSize: '0.8rem',
+    color: '#8A8F8B',
+    textDecoration: 'none',
+    transition: 'color 0.2s',
+    minHeight: 38,
+    padding: '4px 8px',
+    borderRadius: 8,
+    width: '100%',
+    boxSizing: 'border-box',
+  }
   return href ? (
     <a
       href={href}
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 8,
-        fontSize: '0.78rem',
-        color: '#8A8F8B',
-        textDecoration: 'none',
-        transition: 'color 0.2s',
-      }}
+      style={rowStyle}
+      className="touch-active"
       onMouseOver={(e) => (e.currentTarget.style.color = '#39E87A')}
       onMouseOut={(e) => (e.currentTarget.style.color = '#8A8F8B')}
     >
@@ -1321,7 +1606,7 @@ function ContactRow({ icon, label, href }: { icon: React.ReactNode; label: strin
       <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
     </a>
   ) : (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.78rem', color: '#8A8F8B' }}>
+    <div style={rowStyle}>
       <span>{icon}</span>
       <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
     </div>
@@ -1387,17 +1672,20 @@ function ProjectCard({
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="touch-active"
                   style={{
-                    padding: '6px 14px',
+                    padding: '8px 16px',
+                    minHeight: 42,
                     borderRadius: 8,
                     background: 'rgba(57,232,122,0.12)',
                     border: '1px solid rgba(57,232,122,0.35)',
                     color: '#39E87A',
-                    fontSize: '0.8rem',
+                    fontSize: '0.82rem',
                     fontWeight: 600,
                     textDecoration: 'none',
                     display: 'inline-flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     gap: 4,
                     transition: 'all 0.2s',
                   }}
@@ -1416,17 +1704,20 @@ function ProjectCard({
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="touch-active"
                   style={{
-                    padding: '6px 14px',
+                    padding: '8px 16px',
+                    minHeight: 42,
                     borderRadius: 8,
                     background: 'rgba(255,255,255,0.06)',
                     border: '1px solid rgba(255,255,255,0.12)',
                     color: '#F5F5F5',
-                    fontSize: '0.8rem',
+                    fontSize: '0.82rem',
                     fontWeight: 600,
                     textDecoration: 'none',
                     display: 'inline-flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     gap: 6,
                     transition: 'all 0.2s',
                   }}
