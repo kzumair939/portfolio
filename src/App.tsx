@@ -15,7 +15,7 @@ export const PERSONAL_INFO = {
   web3formsKey: import.meta.env.VITE_WEB3FORMS_KEY || '',
 }
 
-const NAV_LINKS = ['About', 'Skills', 'Projects', 'Journey', 'Education', 'Contact']
+const NAV_LINKS = ['About', 'Skills', 'Projects', 'Certifications', 'Journey', 'Education', 'Contact']
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -461,6 +461,79 @@ export default function App() {
                 hovered={cardHover === 'mindcare'}
                 onHover={(v) => setCardHover(v)}
               />
+            </div>
+          </section>
+
+          {/* CERTIFICATIONS */}
+          <section id="certifications">
+            <div className="section-label" style={{ marginBottom: 12 }}>Certifications</div>
+            <h2 style={sectionHeading}>Continuous Learning & Growth</h2>
+            <p style={{ color: '#8A8F8B', marginBottom: 32, lineHeight: 1.75, maxWidth: 640 }}>
+              Professional certifications in Spring Boot, Java backend engineering, Generative AI integration, and the Anthropic Claude ecosystem.
+            </p>
+
+            {/* Spring & Java AI Suite */}
+            <div style={{ marginBottom: 36 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  fontSize: '0.75rem',
+                  fontFamily: "'JetBrains Mono', monospace",
+                  color: '#39E87A',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
+                  marginBottom: 16,
+                  fontWeight: 600,
+                }}
+              >
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#39E87A', display: 'inline-block', boxShadow: '0 0 8px #39E87A' }} />
+                Spring & Java AI
+              </div>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: 20,
+                }}
+              >
+                {CERTIFICATIONS.filter((c) => c.provider !== 'Anthropic').map((cert) => (
+                  <CertificationCard key={cert.title} {...cert} />
+                ))}
+              </div>
+            </div>
+
+            {/* Anthropic Certifications Suite */}
+            <div>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  fontSize: '0.75rem',
+                  fontFamily: "'JetBrains Mono', monospace",
+                  color: '#39E87A',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
+                  marginBottom: 16,
+                  fontWeight: 600,
+                }}
+              >
+                <AnthropicIcon size={16} color="#39E87A" />
+                Anthropic Certifications
+              </div>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                  gap: 20,
+                }}
+              >
+                {CERTIFICATIONS.filter((c) => c.provider === 'Anthropic').map((cert) => (
+                  <CertificationCard key={cert.title} {...cert} />
+                ))}
+              </div>
             </div>
           </section>
 
@@ -1006,6 +1079,195 @@ export default function App() {
           </div>
         </div>
       )}
+    </div>
+  )
+}
+
+/* ── Certifications Data & Components ── */
+
+export interface Certification {
+  title: string
+  provider: 'Simplilearn' | 'Coursera' | 'Anthropic'
+  date: string
+}
+
+export const CERTIFICATIONS: Certification[] = [
+  {
+    title: 'Spring AI',
+    provider: 'Simplilearn',
+    date: '2026',
+  },
+  {
+    title: 'Generative AI for Java & Spring',
+    provider: 'Coursera',
+    date: '2026',
+  },
+  {
+    title: 'Claude Code in Action',
+    provider: 'Anthropic',
+    date: 'June 2026',
+  },
+  {
+    title: 'Claude Platform 101',
+    provider: 'Anthropic',
+    date: 'June 2026',
+  },
+  {
+    title: 'AI Fluency: Frameworks',
+    provider: 'Anthropic',
+    date: 'June 2026',
+  },
+  {
+    title: 'Claude Code 101',
+    provider: 'Anthropic',
+    date: 'June 2026',
+  },
+  {
+    title: 'Claude 101',
+    provider: 'Anthropic',
+    date: 'June 2026',
+  },
+]
+
+function SimplilearnIcon({ size = 16, color = '#39E87A' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
+      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+    </svg>
+  )
+}
+
+function CourseraIcon({ size = 16, color = '#39E87A' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M14.5 9a3.5 3.5 0 1 0 0 6" />
+    </svg>
+  )
+}
+
+function AnthropicIcon({ size = 16, color = '#39E87A' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
+      <path d="M13.827 3.536h2.955L24 20.464h-3.327l-1.89-4.282H11.21l-1.89 4.282H6l7.827-16.928zm3.844 9.873l-2.316-5.247-2.316 5.247h4.632zM0 20.464l4.282-9.255h3.045L3.045 20.464H0z" />
+    </svg>
+  )
+}
+
+function AwardIcon({ size = 14, color = 'currentColor' }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}>
+      <circle cx="12" cy="8" r="6" />
+      <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+    </svg>
+  )
+}
+
+function ProviderIcon({ provider, size = 16 }: { provider: string; size?: number }) {
+  if (provider === 'Anthropic') return <AnthropicIcon size={size} color="#39E87A" />
+  if (provider === 'Coursera') return <CourseraIcon size={size} color="#39E87A" />
+  if (provider === 'Simplilearn') return <SimplilearnIcon size={size} color="#39E87A" />
+  return <AwardIcon size={size} color="#39E87A" />
+}
+
+function CertificationCard({ title, provider, date }: Certification) {
+  return (
+    <div
+      className="glass glass-card"
+      style={{
+        borderRadius: 16,
+        padding: '20px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        gap: 16,
+      }}
+    >
+      {/* Top row: Provider icon/badge + date */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+        <div
+          style={{
+            width: 36,
+            height: 36,
+            borderRadius: 10,
+            background: 'rgba(57,232,122,0.08)',
+            border: '1px solid rgba(57,232,122,0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+          }}
+        >
+          <ProviderIcon provider={provider} size={18} />
+        </div>
+
+        <span
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: '0.72rem',
+            color: '#39E87A',
+            background: 'rgba(57,232,122,0.08)',
+            border: '1px solid rgba(57,232,122,0.2)',
+            borderRadius: 6,
+            padding: '3px 9px',
+            fontWeight: 600,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {date}
+        </span>
+      </div>
+
+      {/* Primary Certification Title & Provider Subtext */}
+      <div>
+        <h3
+          style={{
+            fontSize: '1.05rem',
+            fontWeight: 700,
+            color: '#F5F5F5',
+            margin: '0 0 6px 0',
+            lineHeight: 1.35,
+            letterSpacing: '-0.01em',
+          }}
+        >
+          {title}
+        </h3>
+        <p
+          style={{
+            fontSize: '0.8rem',
+            color: '#8A8F8B',
+            margin: 0,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+          }}
+        >
+          <span>{provider}</span>
+          <span style={{ color: 'rgba(255,255,255,0.2)' }}>•</span>
+          <span style={{ color: '#39E87A', fontSize: '0.75rem' }}>Certificate</span>
+        </p>
+      </div>
+
+      {/* Card Footer / Metadata Accent */}
+      <div
+        style={{
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          paddingTop: 10,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          fontSize: '0.7rem',
+          color: '#8A8F8B',
+        }}
+      >
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+          <AwardIcon size={13} color="#39E87A" />
+          Verified Credential
+        </span>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", color: 'rgba(255,255,255,0.3)', fontSize: '0.65rem' }}>
+          {provider.toUpperCase()}
+        </span>
+      </div>
     </div>
   )
 }
