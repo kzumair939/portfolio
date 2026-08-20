@@ -3,12 +3,12 @@ import profilePhoto from '@/imports/profile.jpeg'
 
 // ── EDIT YOUR PERSONAL DETAILS & SOCIAL LINKS HERE ──
 export const PERSONAL_INFO = {
-  name: 'M. Umair Khan',
+  name: 'Umair Khan',
   title: 'Software Engineer',
-  location: 'Pakistan',
+  location: 'Karachi, Pakistan',
   email: 'kzumair939@gmail.com',
-  phone: '+92 314 2712220',
-  linkedin: 'https://www.linkedin.com/in/umairkhan28/',
+  phone: '0314 2712220',
+  linkedin: 'https://linkedin.com/in/umairkhan28',
   github: 'https://github.com/kzumair939',
   resumeUrl: '/Umair_Khan_Resume.pdf',
   // Get a free direct inbox key at https://web3forms.com (no backend required!)
@@ -428,7 +428,7 @@ export default function App() {
 
             {/* tech stack chips */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, justifyContent: 'center' }}>
-              {['Java', 'Spring Boot', 'React', 'MySQL', 'Docker'].map((t) => (
+              {['Java', 'Spring Boot', 'Python', 'React', 'MySQL', 'MongoDB', 'Docker'].map((t) => (
                 <span key={t} className="tag" style={{ fontSize: '0.65rem', padding: '2px 7px' }}>{t}</span>
               ))}
             </div>
@@ -520,10 +520,7 @@ export default function App() {
                 marginBottom: 28,
               }}
             >
-              I'm M. Umair Khan, a Software Engineering student focused on building modern
-              applications with Java, Spring Boot, React, and Docker. I enjoy designing backend
-              systems, REST APIs, authentication flows, and practical software solutions that solve
-              real-world problems.
+              Junior Software Engineer focused on Java and Spring Boot backend development, with hands-on experience building REST APIs, authentication and authorization systems, and database-driven applications. Independently designed and built full-stack projects using Spring Boot, React, MySQL/MongoDB, and Docker, including role-based access control and JWT/OAuth2 authentication.
             </p>
 
             {/* Hero CTAs (Fitts's & Von Restorff UX Laws) */}
@@ -578,9 +575,9 @@ export default function App() {
             {/* Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 14, maxWidth: 540 }}>
               {[
-                { num: '2+', label: 'Major Projects' },
-                { num: '10+', label: 'Technologies Used' },
-                { num: 'Full', label: 'Stack Development' },
+                { num: '3+', label: 'Engineered Projects' },
+                { num: '98+', label: 'REST & WS Endpoints' },
+                { num: 'Full', label: 'Stack Architecture' },
               ].map((s) => (
                 <div
                   key={s.label}
@@ -613,18 +610,18 @@ export default function App() {
             <div className="marquee-container" style={{ padding: '8px 0' }}>
               <div className="marquee-track" style={{ animationDuration: '28s', gap: 16 }}>
                 {[
-                  { cat: 'Backend', skills: ['Java', 'Spring Boot', 'Spring Security', 'REST APIs', 'JWT', 'Microservices'] },
-                  { cat: 'Frontend', skills: ['React', 'JavaScript', 'HTML', 'CSS', 'Vite'] },
-                  { cat: 'Database', skills: ['MySQL', 'SQL'] },
-                  { cat: 'DevOps & Tools', skills: ['Docker', 'Docker Compose', 'Git', 'GitHub', 'Nginx'] },
-                  { cat: 'Backend', skills: ['Java', 'Spring Boot', 'Spring Security', 'REST APIs', 'JWT', 'Microservices'] },
-                  { cat: 'Frontend', skills: ['React', 'JavaScript', 'HTML', 'CSS', 'Vite'] },
-                  { cat: 'Database', skills: ['MySQL', 'SQL'] },
-                  { cat: 'DevOps & Tools', skills: ['Docker', 'Docker Compose', 'Git', 'GitHub', 'Nginx'] },
-                  { cat: 'Backend', skills: ['Java', 'Spring Boot', 'Spring Security', 'REST APIs', 'JWT', 'Microservices'] },
-                  { cat: 'Frontend', skills: ['React', 'JavaScript', 'HTML', 'CSS', 'Vite'] },
-                  { cat: 'Database', skills: ['MySQL', 'SQL'] },
-                  { cat: 'DevOps & Tools', skills: ['Docker', 'Docker Compose', 'Git', 'GitHub', 'Nginx'] },
+                  { cat: 'Languages & Core', skills: ['Java', 'Python', 'JavaScript', 'HTML', 'CSS'] },
+                  { cat: 'Backend & APIs', skills: ['Spring Boot', 'REST APIs', 'WebSocket APIs', 'Auth & RBAC'] },
+                  { cat: 'Security & Testing', skills: ['JWT', 'OAuth2 (Google)', 'JUnit', 'Postman', 'Integration Testing'] },
+                  { cat: 'Databases', skills: ['MySQL', 'MongoDB', 'SQL'] },
+                  { cat: 'DevOps & Tools', skills: ['Docker', 'Docker Compose', 'Nginx', 'Git', 'GitHub'] },
+                  { cat: 'AI-Assisted Dev', skills: ['Claude Code', 'Cursor', 'OpenAI API'] },
+                  { cat: 'Languages & Core', skills: ['Java', 'Python', 'JavaScript', 'HTML', 'CSS'] },
+                  { cat: 'Backend & APIs', skills: ['Spring Boot', 'REST APIs', 'WebSocket APIs', 'Auth & RBAC'] },
+                  { cat: 'Security & Testing', skills: ['JWT', 'OAuth2 (Google)', 'JUnit', 'Postman', 'Integration Testing'] },
+                  { cat: 'Databases', skills: ['MySQL', 'MongoDB', 'SQL'] },
+                  { cat: 'DevOps & Tools', skills: ['Docker', 'Docker Compose', 'Nginx', 'Git', 'GitHub'] },
+                  { cat: 'AI-Assisted Dev', skills: ['Claude Code', 'Cursor', 'OpenAI API'] },
                 ].map((group, idx) => (
                   <div
                     key={idx}
@@ -680,10 +677,10 @@ export default function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               <ProjectCard
                 title="MASAIL"
-                subtitle="Community Issue Reporting & Crowdfunding Platform"
-                description="A community-focused platform enabling residents to report local infrastructure problems, verify residency, back community campaigns, and track repair progress transparently."
-                tags={['Java', 'Spring Boot', 'React', 'MySQL', 'Docker', 'JWT', 'REST API']}
-                features={['Issue Reporting', 'Resident Verification', 'Community Funding', 'Campaign Tracking', 'Role-Based Access', 'Admin Management']}
+                subtitle="Community Issue Tracking & Crowdfunding Platform"
+                description="Independently designed and built a full-stack platform with 20+ REST APIs using Spring Boot and MongoDB to manage community issue reporting, residency verification, and crowdfunding campaign workflows. Implemented role-based access control across residents, verification officers, field officers, and administrators."
+                tags={['Java', 'Spring Boot', 'React.js', 'MongoDB', 'Docker', 'Docker Compose', 'Nginx', 'REST API']}
+                features={['20+ REST APIs', 'Role-Based Access Control (RBAC)', 'Multi-Role Approval Workflows', 'Campaigns & Quotation Tracking', 'Containerized Docker Deployment']}
                 visual="masail"
                 githubUrl="https://github.com/kzumair939/MASAIL"
                 hovered={cardHover === 'masail'}
@@ -691,13 +688,23 @@ export default function App() {
               />
               <ProjectCard
                 title="MindCare"
-                subtitle="Mental Health Support Platform"
-                description="A modern full-stack mental health platform connecting users with therapists through secure WebRTC video sessions, real-time WebSocket messaging, group therapy rooms, and health assessments."
-                tags={['Java', 'Spring Boot', 'React', 'WebRTC', 'WebSockets', 'MySQL', 'Docker', 'JWT', 'OAuth2']}
-                features={['WebRTC Video Calls', 'WebSocket Messaging', 'JWT & Google OAuth2', 'Therapist Dashboard', 'Group Therapy Rooms', 'Real-time Chat & Analytics']}
+                subtitle="Digital Therapy Platform"
+                description="Independently designed and built a full-stack therapy platform with 78 API endpoints (75 REST APIs and 3 WebSocket APIs). Implemented authentication and authorization using JWT and Google OAuth2, logic-driven triage questionnaire, session booking, and real-time chat/video functionality."
+                tags={['Java', 'Spring Boot', 'React.js', 'MySQL', 'WebSocket', 'JWT', 'OAuth2', 'JUnit', 'Postman']}
+                features={['78 Endpoints (75 REST + 3 WebSocket)', 'JWT & Google OAuth2 Auth', 'Logic-Driven Triage Questionnaire', 'Real-Time Chat & Session Booking', 'JUnit & Postman Integration Tested']}
                 visual="mindcare"
                 githubUrl="https://github.com/kzumair939/MindCare_"
                 hovered={cardHover === 'mindcare'}
+                onHover={(v) => setCardHover(v)}
+              />
+              <ProjectCard
+                title="Financial Fraud Detection System"
+                subtitle="Transaction Monitoring & Rule-Based Detection Engine"
+                description="Built a system to ingest, parse, and monitor transactional records using Python and structured MySQL queries to flag anomalous account activity. Implemented rule-based detection logic to identify suspicious transaction patterns through structured data processing techniques."
+                tags={['Python', 'MySQL', 'Data Processing', 'Pattern Recognition', 'Rule-Based Engine']}
+                features={['Transactional Record Ingestion', 'Anomalous Activity Flagging', 'Structured Query Processing', 'Rule-Based Pattern Detection']}
+                visual="fraud"
+                hovered={cardHover === 'fraud'}
                 onHover={(v) => setCardHover(v)}
               />
             </div>
@@ -782,25 +789,32 @@ export default function App() {
             <h2 style={sectionHeading}>Learning By Building</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
               <TimelineItem
-                title="Software Engineering Student"
-                sub="Mohammad Ali Jinnah University"
+                title="Software Engineer"
+                sub="Karachi, Pakistan"
                 color="#39E87A"
                 last={false}
-                items={['Java', 'Spring Boot', 'Backend development', 'Databases', 'Software architecture', 'Full-stack development']}
+                items={['Java', 'Spring Boot', 'REST APIs', 'Role-Based Access Control', 'JWT / OAuth2', 'System Architecture']}
               />
               <TimelineItem
-                title="MindCare — Mental Health Support Platform"
-                sub="Full-Stack Engineering Project (WebRTC & WebSockets)"
+                title="MindCare — Digital Therapy Platform"
+                sub="Full-Stack Engineering Project (78 API Endpoints)"
                 color="#39E87A"
                 last={false}
-                items={['Spring Boot', 'React SPA', 'WebRTC Video Calls', 'WebSocket Chat', 'JWT & Google OAuth2', 'MySQL', 'Docker']}
+                items={['75 REST APIs + 3 WS APIs', 'JWT & Google OAuth2', 'Triage Questionnaire', 'JUnit & Postman', 'MySQL']}
               />
               <TimelineItem
-                title="MASAIL — Community Platform"
-                sub="Full-Stack Engineering Project"
+                title="MASAIL — Community Issue Tracking & Crowdfunding"
+                sub="Full-Stack Engineering Project (20+ REST APIs)"
+                color="#39E87A"
+                last={false}
+                items={['20+ REST APIs', 'MongoDB', 'RBAC (Residents, Officers, Admins)', 'Docker Compose', 'Nginx']}
+              />
+              <TimelineItem
+                title="Financial Fraud Detection System"
+                sub="Transaction Monitoring & Detection Engine"
                 color="#39E87A"
                 last={true}
-                items={['Authentication & Authorization', 'Verification workflows', 'REST APIs', 'Campaign management', 'Docker deployment']}
+                items={['Python', 'MySQL Queries', 'Transactional Data Ingestion', 'Rule-Based Detection Logic', 'Pattern Recognition']}
               />
             </div>
           </section>
@@ -1654,7 +1668,13 @@ function ProjectCard({
           transition: 'all 0.3s',
         }}
       >
-        {visual === 'masail' ? <MasailVisual hovered={hovered} /> : <MindCareVisual hovered={hovered} />}
+        {visual === 'masail' ? (
+          <MasailVisual hovered={hovered} />
+        ) : visual === 'mindcare' ? (
+          <MindCareVisual hovered={hovered} />
+        ) : (
+          <FraudVisual hovered={hovered} />
+        )}
       </div>
 
       <div style={{ padding: '20px 20px' }}>
@@ -1835,6 +1855,36 @@ function MindCareVisual({ hovered }: { hovered: boolean }) {
             }}
           >
             {b.label}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function FraudVisual({ hovered }: { hovered: boolean }) {
+  const steps = ['Transactional Record Ingestion', 'Anomalous Activity Flagging', 'MySQL Structured Query Monitoring', 'Rule-Based Pattern Detection', 'Suspicious Account Flagging', 'Structured Data Processing']
+  const doubleSteps = [...steps, ...steps, ...steps]
+
+  return (
+    <div className="marquee-container">
+      <div className="marquee-track" style={{ animationDuration: '36s' }}>
+        {doubleSteps.map((s, i) => (
+          <div
+            key={i}
+            style={{
+              background: 'rgba(57,232,122,0.08)',
+              border: '1px solid rgba(57,232,122,0.35)',
+              borderRadius: 8,
+              padding: '6px 14px',
+              fontSize: '0.72rem',
+              color: '#39E87A',
+              fontFamily: "'JetBrains Mono', monospace",
+              whiteSpace: 'nowrap',
+              boxShadow: '0 0 12px rgba(57,232,122,0.1)',
+            }}
+          >
+            {s}
           </div>
         ))}
       </div>
